@@ -1,0 +1,8 @@
+README.md
+setup.py
+minpy/__init__.py
+minpy/omega.py
+minpy.egg-info/PKG-INFO
+minpy.egg-info/SOURCES.txt
+minpy.egg-info/dependency_links.txt
+minpy.egg-info/top_level.txt
