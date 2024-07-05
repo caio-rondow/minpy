@@ -87,4 +87,7 @@ class Omega:
         self.__routed = {}
 
     def show(self) -> None:
-        pass
+        for i in range(self.size):
+            for j in range(self.stages):
+                print(self.__min[ i * self.stages + j], end=' ')
+            print() 
