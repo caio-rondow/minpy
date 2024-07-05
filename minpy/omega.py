@@ -1,5 +1,5 @@
 from math import log, ceil, pow
-from slider import Slider
+from .slider import Slider
 import numpy as np
 
 class Omega:
