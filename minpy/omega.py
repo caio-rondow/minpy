@@ -82,8 +82,8 @@ class Omega:
             self.__swt[ row * self.stages + stage]  = self.window.source(path, stage+1)
 
     def clear(self) -> None:
-        self.__min    = np.zeros(self.size, dtype=int)
-        self.__swt    = np.zeros(self.size, dtype=int) - 1
+        self.__min    = np.zeros(self.size * self.stages, dtype=int)
+        self.__swt    = np.zeros(self.size * self.stages, dtype=int) - 1
         self.__routed = {}
 
     def show(self) -> None:
