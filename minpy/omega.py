@@ -1,4 +1,4 @@
-from math import log, ceil, pow
+from math import log2, ceil, pow
 from .slider import Slider
 import numpy as np
 
@@ -8,7 +8,7 @@ class Omega:
         self.size       : int = n
         self.extras     : int = extras
         self.radix      : int = radix
-        self.stages     : int = ceil(log(n, radix)) + extras
+        self.stages     : int = ceil(log2(n) / log2(radix)) + extras
         self.num_extras : int = ceil(pow(radix, extras))
 
         self.window : Slider = Slider(n, extras, radix)
@@ -39,6 +39,7 @@ class Omega:
                     break
             
             if found_path:
+                self.__routed[output] = path
                 self.__send_message(path)
                 return True
             
@@ -62,6 +63,8 @@ class Omega:
 
             if self.__min[idx] == 0:
                 self.__swt[idx] = -1
+            
+        del self.__routed[output]
 
         return True
 
@@ -78,8 +81,8 @@ class Omega:
 
             row : int = self.window.slide(path, stage+1)
 
-            self.__min[ row * self.stages + stage] += 1
-            self.__swt[ row * self.stages + stage]  = self.window.source(path, stage+1)
+            self.__min[ row * self.stages + stage ] += 1
+            self.__swt[ row * self.stages + stage ]  = self.window.source(path, stage+1)
 
     def clear(self) -> None:
         self.__min    = np.zeros(self.size * self.stages, dtype=int)
@@ -87,6 +90,7 @@ class Omega:
         self.__routed = {}
 
     def show(self) -> None:
+        
         for i in range(self.size):
             for j in range(self.stages):
                 print(self.__min[ i * self.stages + j], end=' ')
